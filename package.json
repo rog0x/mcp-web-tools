@@ -1,0 +1,31 @@
+{
+  "name": "@rog0x/mcp-web-tools",
+  "version": "1.0.0",
+  "description": "MCP server providing web utilities for AI agents - screenshots, extraction, monitoring, search",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-web-tools": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "keywords": ["mcp", "claude", "ai", "web-tools", "screenshot", "scraping", "monitoring"],
+  "author": "rog0x",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rog0x/mcp-web-tools"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "cheerio": "^1.0.0",
+    "turndown": "^7.1.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/turndown": "^5.0.4",
+    "typescript": "^5.4.0"
+  }
+}
