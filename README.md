@@ -1,3 +1,5 @@
+[![MCP Server](https://glama.ai/mcp/servers/rog0x/mcp-web-tools/badges/score.svg)](https://glama.ai/mcp/servers/rog0x/mcp-web-tools)
+
 # MCP Web Tools
 
 A powerful MCP (Model Context Protocol) server that gives AI agents web superpowers. Extract content, search the web, monitor sites, and convert HTML to markdown — all through a clean tool interface.
