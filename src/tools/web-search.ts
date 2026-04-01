@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import { tavily } from "@tavily/core";
 
 export interface SearchResult {
   title: string;
@@ -6,7 +7,27 @@ export interface SearchResult {
   snippet: string;
 }
 
-export async function webSearch(query: string, numResults: number = 10): Promise<SearchResult[]> {
+/**
+ * Search via Tavily API. Activated when TAVILY_API_KEY is set.
+ */
+async function tavilySearch(query: string, numResults: number): Promise<SearchResult[]> {
+  const client = tavily({ apiKey: process.env.TAVILY_API_KEY! });
+  const response = await client.search(query, {
+    maxResults: numResults,
+    searchDepth: "basic",
+  });
+
+  return response.results.map((r: any) => ({
+    title: r.title || "",
+    url: r.url,
+    snippet: r.content || "",
+  }));
+}
+
+/**
+ * Search via DuckDuckGo HTML scraping (default fallback).
+ */
+async function duckDuckGoSearch(query: string, numResults: number): Promise<SearchResult[]> {
   const encoded = encodeURIComponent(query);
   const url = `https://html.duckduckgo.com/html/?q=${encoded}`;
 
@@ -51,4 +72,11 @@ export async function webSearch(query: string, numResults: number = 10): Promise
   });
 
   return results;
+}
+
+export async function webSearch(query: string, numResults: number = 10): Promise<SearchResult[]> {
+  if (process.env.TAVILY_API_KEY) {
+    return tavilySearch(query, numResults);
+  }
+  return duckDuckGoSearch(query, numResults);
 }

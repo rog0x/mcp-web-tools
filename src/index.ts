@@ -41,7 +41,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "web_search",
       description:
-        "Search the web using DuckDuckGo and return structured results with titles, URLs, and snippets",
+        "Search the web and return structured results with titles, URLs, and snippets. Uses Tavily API when TAVILY_API_KEY is set, otherwise falls back to DuckDuckGo",
       inputSchema: {
         type: "object" as const,
         properties: {
